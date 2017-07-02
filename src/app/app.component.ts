@@ -1,5 +1,12 @@
 import { Component,OnInit } from '@angular/core';
+
+
+//Components
+import {NavbarComponent} from './components/navbar/navbar.component';
+
+//Jquery Variable
 declare var $:any
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
