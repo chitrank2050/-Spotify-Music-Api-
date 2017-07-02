@@ -1,3 +1,26 @@
-<p>
-  search works!
-</p>
+<div class="row">
+  <div class="medium-10 medium-offset-1 column">
+    <h1>Need Music?</h1>
+    <p>Use this app to browse and find your favourite music</p>
+    <form>
+      <input type="text" [(ngModel)]="_searchStr" name="searchStr" placeholder="Searchh Here..." (keyup)="searchMusic()"/>
+    </form>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="searchRes;else elseBlock">
+  <div *ngFor="let res of searchRes" class="medium-10 medium-offset-1 column">
+    <h4><a routerLink="/artist/{{res.id}}">{{res.name}}</a></h4>
+    <div>
+      Genres: <span *ngFor="let genre of res.genres">{{genre}}|</span>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #elseBlock>
+<div class="row">
+  <h4>start Typing</h4>
+</div>
+</ng-template>
