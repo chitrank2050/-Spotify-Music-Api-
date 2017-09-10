@@ -16,7 +16,7 @@ import { SpotifyService } from '../../services/spotify.service';
 export class ArtistComponent implements OnInit {
   id:string;
   artist:Artist[];
-  album:Album[];
+  albums:Album[];
 
   constructor(private _spotifyService:SpotifyService,
               private _route:ActivatedRoute) {
@@ -30,7 +30,14 @@ export class ArtistComponent implements OnInit {
           this._spotifyService.getArtist(id)
               .subscribe(artist=>{
                 this.artist=artist;
+                console.log('>>',this.artist);
               })
+
+          this._spotifyService.getAlbum(id)
+              .subscribe (album=>{
+                this.albums=album.items;
+                console.log('>>',this.albums);
+          })
         })
   }
 

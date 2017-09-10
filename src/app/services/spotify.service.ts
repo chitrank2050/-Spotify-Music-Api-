@@ -13,9 +13,10 @@ export class SpotifyService {
 
   private _searchUrl:string;
   private _artistUrl:string;
+  private _albumsUrl:string;
   private _clientId = '6dc4a3c09a1f4035a93cd8fb4b9ffd98';
   private _clientSecret ='48dec45432ce4351b7af8a2f1a140598';
-  private _OAuth='Bearer BQByjtIu8VMa3Uf-KgMb6kk1-f8wF2EoDXGb6mEdauGRwl4zef5-rxC7W2asJHdtqYsudwdXfFxAJQBaXJC2eStnexB9el6zAcAX_uAut_r6ekq9zlhNmd10MVqch9rCiJ5wL5rzxffO3B7iGaOvpDU5tAR-WgJuLf-Kc70kHx9UPHweckLJ0DpHXq_WNnU56cHOzaJZsBiH7zdfq-F2Hbr8QABgNOXkRqSE6pvvjtyIVMVx-WRrcTsQ3NplyLpgLeMPZ7MakCra2dmjG2B_qnqsjKI1r7kzZ3b7bZNBcF1Pt6_-YAxIKSXtzwj7_9Cmflk';
+  private _OAuth='Bearer BQCHtsU2FkttK-zdsFTVaWCvwqeZKcnUkB3tnxtATsVvH7X_QxBjZVKE39nBObxJpoYQu6ErBj2u9BAvhFxdVZiaO8OWlSgzVsbU9Y27rfelIkZXsGPdAeiBoYbK-nneVbWEk2e5yl0W';
 
   private headers=new Headers({
     'Content-Type':'application/json',
@@ -46,6 +47,13 @@ export class SpotifyService {
             .catch(this.handleError)
   }
 
+  getAlbum(artistId:string)
+  {  
+    this._albumsUrl='https://api.spotify.com/v1/artists/'+artistId +'/albums';
+    return this._http.get(this._albumsUrl,this.options)
+            .map(res=>res.json())
+            .catch(this.handleError)
+  }
   private handleError (error: Response | any) 
   {
         let errMsg: string;
