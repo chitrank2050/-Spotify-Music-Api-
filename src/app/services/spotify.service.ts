@@ -10,13 +10,21 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 
 export class SpotifyService {
+/**
+ * Property Variables
+ */
 
   private _searchUrl:string;
   private _artistUrl:string;
   private _albumsUrl:string;
+  private _albumUrl:string;
+
+/**
+ * Token Variables
+ */
   private _clientId = '6dc4a3c09a1f4035a93cd8fb4b9ffd98';
   private _clientSecret ='48dec45432ce4351b7af8a2f1a140598';
-  private _OAuth='Bearer BQCHtsU2FkttK-zdsFTVaWCvwqeZKcnUkB3tnxtATsVvH7X_QxBjZVKE39nBObxJpoYQu6ErBj2u9BAvhFxdVZiaO8OWlSgzVsbU9Y27rfelIkZXsGPdAeiBoYbK-nneVbWEk2e5yl0W';
+  private _OAuth='Bearer BQCdQXBr3_qgkUpM5e3uNkFPh1WSqLfJqgLMiOMm0psLaTWRNex1MAnCxyojWaatxhPS3bj4_XOh3g7vP3Zgu83razzm0RXR058JTgmlZIYrh7cIAt51FuJEpOCJJEUZVQylvZHlENTB';
 
   private headers=new Headers({
     'Content-Type':'application/json',
@@ -47,9 +55,17 @@ export class SpotifyService {
             .catch(this.handleError)
   }
 
-  getAlbum(artistId:string)
+  getAlbums(artistId:string)
   {  
     this._albumsUrl='https://api.spotify.com/v1/artists/'+artistId +'/albums';
+    return this._http.get(this._albumsUrl,this.options)
+            .map(res=>res.json())
+            .catch(this.handleError)
+  }
+
+  getAnAlbum(albumId:string)
+  {
+    this._albumsUrl='https://api.spotify.com/v1/albums/'+albumId;
     return this._http.get(this._albumsUrl,this.options)
             .map(res=>res.json())
             .catch(this.handleError)
